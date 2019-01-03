@@ -2,11 +2,12 @@ import React from 'react'
 import Restaurant from '../Restaurant';
 import PropTypes from 'prop-types'
 import { ListGroup, ListGroupItem } from 'reactstrap';
-import { Query } from 'react-apollo'
+import { Query, Mutation } from 'react-apollo'
 import { GET_CHECKOUT_SELECTIONS, GET_RESTAURANTS } from '../../graphql/queries';
 import * as alert from '../../utils/altert'
 import { defaultPollingInterval } from '../../utils/constants'
 import './styles.css'
+import { ADD_CHECKOUT_SELECTION } from '../../graphql/mutators';
 
 RestaurantAvailableForCheckout.propTypes = {
   restaurants: PropTypes.array.isRequired,
@@ -83,9 +84,20 @@ function RestaurantAvailableForCheckout(props) {
 
   function renderRestaurant(restaurant) {
     return (
-      <ListGroupItem key={restaurant._id}>
-        <div>{restaurant.name}</div>
-      </ListGroupItem>
+      <Mutation
+        mutation={ADD_CHECKOUT_SELECTION}
+        variables={{ checkoutId: props.checkoutId, restaurantId: restaurant._id }}
+        onError={error => alert.error(error.message)}
+        onCompleted={() => {
+          alert.success('Restaurant selected!')
+        }}
+      >
+        {onAddSelection =>
+          <ListGroupItem key={restaurant._id} onClick={onAddSelection}>
+            <Restaurant restaurant={restaurant} />
+          </ListGroupItem>}
+      </Mutation>
+
     )
   }
 }
