@@ -26,7 +26,7 @@ const SelectionType = new GraphQLObjectType({
     name: 'SelectionType',
     fields: () => ({
         _id: { type: GraphQLID},
-        restaurantIds: { type: new GraphQLList(GraphQLString)},
+        restaurantId: { type: GraphQLString},
         checkoutId: { type: GraphQLString }
     }),
 });
@@ -123,7 +123,18 @@ const Mutation = new GraphQLObjectType({
             resolve: async function (parent, args) {
                 return await Checkout.findOneAndUpdate({_id: args._id}, {$set:{status: "finished"}}, {new: true});
             }
-        }
+        },
+        addSelection: {
+            type: SelectionType,
+            args: {
+                checkoutId: {type: new GraphQLNonNull(GraphQLString)},
+                restaurantId: {type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve: async function (parent, args) {
+                const newSelection = new Selection({restaurantId: args.restaurantId, checkoutId: args.checkoutId});
+                return await newSelection.save();
+            }
+        },
     },
 });
 
