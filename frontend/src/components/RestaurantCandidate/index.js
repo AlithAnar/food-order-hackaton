@@ -59,9 +59,6 @@ function renderUpVote(props, votes) {
       mutation={ADD_VOTE}
       variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id, username }}
       onError={error => alert.error(error.message)}
-      onCompleted={() => {
-        alert.success('Vote added!')
-      }}
     >
       {onAddVote => <Button color="success" onClick={onAddVote}>{'+'}</Button>}
     </Mutation>
@@ -79,9 +76,6 @@ function renderDownVote(props, votes) {
       mutation={DELETE_VOTE}
       variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id, username }}
       onError={error => alert.error(error.message)}
-      onCompleted={() => {
-        alert.success('Vote removed!')
-      }}
     >
       {onRemoveVote => <Button color="danger" onClick={onRemoveVote}>{'-'}</Button>}
     </Mutation>
