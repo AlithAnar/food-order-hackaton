@@ -29,7 +29,8 @@ function RestaurantList(props) {
 
           if (error) {
             stopPolling()
-            return alert.error(error.message)
+            alert.error(error.message)
+            return <div>Error</div>
           }
 
           startPolling(defaultPollingInterval)
