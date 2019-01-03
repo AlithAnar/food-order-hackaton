@@ -86,8 +86,6 @@ function RestaurantAvailableForCheckout(props) {
         onError={error => alert.error(error.message)}
         onCompleted={() => {
           alert.success('Restaurant selected!')
-          console.log('restaurantId', restaurant._id)
-          console.log('checkoutId', props.checkoutId)
         }}
       >
         {onAddSelection =>

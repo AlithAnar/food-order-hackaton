@@ -17,13 +17,10 @@ RestaurantAvailableForCheckout.defaultProps = {
 }
 
 function RestaurantAvailableForCheckout(props) {
-  console.log(1)
   return (
     <ListGroup className={'availableRestaurants'}>
       {decorateWithRestaurants((restaurantsLoading, restaurantsError, restaurantsData) => {
         return decorateWithSelections((selectionsLoading, selectionsError, selectionsData) => {
-          console.log(restaurantsData)
-          console.log(selectionsData)
           if (restaurantsLoading || selectionsLoading) {
             return <div>Fetching</div>
           }
