@@ -39,7 +39,7 @@ export const GET_CHECKOUT_SELECTIONS = gql
   `
   query FoodOrderRootQueryType($checkoutId: String!) {
     checkoutSelections(checkoutId: $checkoutId) {
-      restaurantIds
+      restaurantId
       checkoutId
     }
   }

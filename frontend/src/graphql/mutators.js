@@ -55,7 +55,7 @@ export const ADD_CHECKOUT_SELECTION = gql
   mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
     addSelection(checkoutId: $checkoutId, restaurantId: $restaurantId) {
       checkoutId
-      restaurantIds
+      restaurantId
     }
   }
 `

@@ -17,10 +17,13 @@ RestaurantAvailableForCheckout.defaultProps = {
 }
 
 function RestaurantAvailableForCheckout(props) {
+  console.log(1)
   return (
     <ListGroup className={'availableRestaurants'}>
       {decorateWithRestaurants((restaurantsLoading, restaurantsError, restaurantsData) => {
         return decorateWithSelections((selectionsLoading, selectionsError, selectionsData) => {
+          console.log(restaurantsData)
+          console.log(selectionsData)
           if (restaurantsLoading || selectionsLoading) {
             return <div>Fetching</div>
           }
@@ -29,12 +32,8 @@ function RestaurantAvailableForCheckout(props) {
             return <div>Error</div>
           }
 
-          const selections = selectionsData.checkoutSelections.filter(selection => selection.checkoutId === props.checkoutId)
-          let selectedRestaurants = []
-          if (selections[0]) {
-            selectedRestaurants = selections[0].restaurantIds
-          }
-          return restaurantsData.restaurants.filter(restaurant => selectedRestaurants.indexOf(restaurant._id) > 0).map(renderRestaurant)
+          const selectedRestaurants = selectionsData.checkoutSelections.map(selection => selection.restaurantId)
+          return restaurantsData.restaurants.filter(restaurant => selectedRestaurants.indexOf(restaurant._id) > -1).map(renderRestaurant)
         })
       })}
     </ListGroup >

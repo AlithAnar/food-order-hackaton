@@ -30,11 +30,7 @@ function RestaurantAvailableForCheckout(props) {
             return <div>Error</div>
           }
 
-          const selections = selectionsData.checkoutSelections.filter(selection => selection.checkoutId === props.checkoutId)
-          let selectedRestaurants = []
-          if (selections[0]) {
-            selectedRestaurants = selections[0].restaurantIds
-          }
+          const selectedRestaurants = selectionsData.checkoutSelections.map(selection => selection.restaurantId)
           return restaurantsData.restaurants.filter(restaurant => selectedRestaurants.indexOf(restaurant._id) === -1).map(renderRestaurant)
         })
       })}
@@ -90,6 +86,8 @@ function RestaurantAvailableForCheckout(props) {
         onError={error => alert.error(error.message)}
         onCompleted={() => {
           alert.success('Restaurant selected!')
+          console.log('restaurantId', restaurant._id)
+          console.log('checkoutId', props.checkoutId)
         }}
       >
         {onAddSelection =>
