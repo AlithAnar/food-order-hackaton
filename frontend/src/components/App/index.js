@@ -3,6 +3,7 @@ import './App.css';
 import MainPage from '../MainPage'
 import { Route, Link } from "react-router-dom";
 import LoginForm from '../LoginForm';
+import CheckoutsPage from '../CheckoutsPage';
 import { withRouter } from "react-router";
 
 class App extends Component {
@@ -14,7 +15,7 @@ class App extends Component {
           <Link to="/checkouts">Checkouts</Link>
         </nav>
         <Route path="/" exact component={MainPage} />
-        <Route path="/checkouts" exact component={MainPage} />
+        <Route path="/checkouts" exact component={CheckoutsPage} />
         <Route path="/login" exact component={LoginForm} />
       </div>
     );
