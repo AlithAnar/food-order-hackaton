@@ -28,9 +28,7 @@ class App extends Component {
 
   componentDidMount() {
     const userName = localStorage.getItem('userName')
-    if (userName) {
-      this.props.history.push('/')
-    } else {
+    if (!userName) {
       this.props.history.push('/login')
     }
   }
