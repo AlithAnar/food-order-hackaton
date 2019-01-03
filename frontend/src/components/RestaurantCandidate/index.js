@@ -6,6 +6,9 @@ import { Mutation } from 'react-apollo'
 import { REMOVE_RESTAURANT_SELECTION, ADD_VOTE, DELETE_VOTE } from '../../graphql/mutators';
 import RestaurantVotes from '../RestaurantVotes';
 import * as alert from '../../utils/altert'
+import { GET_RESTAURANT_VOTES } from '../../graphql/queries';
+import { Query } from 'react-apollo';
+import { defaultPollingInterval } from '../../utils/constants';
 
 RestaurantCandidate.propTypes = {
   restaurant: PropTypes.object.isRequired,
@@ -16,19 +19,41 @@ function RestaurantCandidate(props) {
   return (
     <div key={props.restaurant._id}>
       <Restaurant restaurant={props.restaurant} />
-      {renderUpVote(props)}
-      {renderDownVote(props)}
-      <RestaurantVotes
-        checkoutId={props.checkoutId}
-        restaurantId={props.restaurant._id}
-      />
-      {/* {renderDeleteButton(props)} */}
+      <Query
+        query={GET_RESTAURANT_VOTES}
+        variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id }}
+      >
+        {({ loading, error, data, startPolling, stopPolling }) => {
+          if (loading) {
+            return <div>Fetching</div>
+          }
+
+          if (error) {
+            stopPolling()
+            return 0
+          }
+
+          startPolling(defaultPollingInterval)
+
+          return (<div>
+            {renderUpVote(props, data.votes)}
+            {renderDownVote(props, data.votes)}
+            {data.votes.length}
+          </div>)
+        }}
+      </Query>
+
     </div>
   )
 }
 
-function renderUpVote(props) {
+function renderUpVote(props, votes) {
+  console.log(votes)
   const username = localStorage.getItem('userName')
+  if (votes.filter(vote => vote.username === username).length > 0) {
+    return null
+  }
+
   return (
     <Mutation
       mutation={ADD_VOTE}
@@ -43,8 +68,12 @@ function renderUpVote(props) {
   )
 }
 
-function renderDownVote(props) {
+function renderDownVote(props, votes) {
   const username = localStorage.getItem('userName')
+  if (votes.filter(vote => vote.username === username).length === 0) {
+    return null
+  }
+
   return (
     <Mutation
       mutation={DELETE_VOTE}
@@ -54,7 +83,7 @@ function renderDownVote(props) {
         alert.success('Vote removed!')
       }}
     >
-      {onRemoveVote => <Button color="success" onClick={onRemoveVote}>{'-'}</Button>}
+      {onRemoveVote => <Button color="danger" onClick={onRemoveVote}>{'-'}</Button>}
     </Mutation>
   )
 }
