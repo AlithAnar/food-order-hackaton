@@ -3,11 +3,12 @@ import BaseComponent from '../BaseComponent';
 import { withRouter } from "react-router";
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import Checkout from '../Checkout';
+import { Button } from 'reactstrap';
 
 class CheckoutsPage extends BaseComponent {
 
   state = {
-    checkouts: [{ date: Date.now() - 10000 }, { date: Date.now() - 20000 }],
+    checkouts: [{ date: Date.now() - 10000, id: 'asdasd' }, { date: Date.now() - 20000, id: 'asdaasadssd' }],
   }
 
   render() {
@@ -16,7 +17,7 @@ class CheckoutsPage extends BaseComponent {
         <ListGroup>
           {this.state.checkouts.map(this.renderCheckout)}
         </ListGroup>
-        <button onClick={this.addCheckout}>Add checkout</button>
+        <Button onClick={this.addCheckout}>Add checkout</Button>
       </div>
     );
   }
@@ -30,7 +31,7 @@ class CheckoutsPage extends BaseComponent {
   }
 
   addCheckout() {
-    const newCheckouts = this.state.checkouts.concat({date: Date.now()})
+    const newCheckouts = this.state.checkouts.concat({date: Date.now(), id: Date.now()})
     this.setState({
       checkouts: newCheckouts,
     })
