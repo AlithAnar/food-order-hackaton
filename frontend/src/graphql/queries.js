@@ -49,8 +49,8 @@ export const GET_CHECKOUT_MESSAGES = gql
 
 export const GET_CHECKOUT_SELECTIONS = gql
   `
-  {
-    selections {
+  query Selections($checkoutId: String!) {
+    selections(checkoutId: $checkoutId) {
       restaurantIds
       checkoutId
     }
