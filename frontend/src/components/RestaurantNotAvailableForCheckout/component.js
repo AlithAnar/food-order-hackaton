@@ -34,7 +34,7 @@ function RestaurantAvailableForCheckout(props) {
           if (selections[0]) {
             selectedRestaurants = selections[0].restaurantIds
           }
-          return restaurantsData.restaurants.filter(restaurant => selectedRestaurants.indexOf(restaurant._id) === -1).map(renderRestaurant)
+          return restaurantsData.restaurants.filter(restaurant => selectedRestaurants.indexOf(restaurant._id) > 0).map(renderRestaurant)
         })
       })}
     </ListGroup >
