@@ -10,10 +10,11 @@ RestaurantVotes.propTypes = {
   checkoutId: PropTypes.string.isRequired,
 }
 
-function RestaurantVotes() {
+function RestaurantVotes(props) {
   return (
     <Query
       query={GET_RESTAURANT_VOTES}
+      variables={{checkoutId: props.checkoutId, restaurantId: props.restaurantId}}
     >
       {({ loading, error, data, startPolling, stopPolling }) => {
         if (loading) {
@@ -27,8 +28,7 @@ function RestaurantVotes() {
 
         startPolling(defaultPollingInterval)
 
-        const votes = data.votes
-        return votes.length
+        return data.votes.length
       }}
     </Query>
   )

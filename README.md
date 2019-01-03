@@ -13,3 +13,6 @@ Najważniejsze:
 - Lista restauracji
 - Input do wprowadzania restauracji
 - 
+
+
+ew zwracać voty razem z selectionami
