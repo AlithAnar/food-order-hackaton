@@ -6,7 +6,7 @@ import { Query } from 'react-apollo'
 import { GET_RESTAURANTS } from '../../graphql/queries';
 import * as alert from '../../utils/altert'
 import { defaultPollingInterval } from '../../utils/constants'
-
+import './styles.css'
 
 RestaurantList.propTypes = {
   restaurants: PropTypes.array.isRequired,
@@ -18,7 +18,7 @@ RestaurantList.defaultProps = {
 
 function RestaurantList(props) {
   return (
-    <ListGroup>
+    <ListGroup className={'restaurantList'}>
       <Query 
         query={GET_RESTAURANTS}
       >
@@ -29,7 +29,8 @@ function RestaurantList(props) {
 
           if (error) {
             stopPolling()
-            return alert.error(error.message)
+            alert.error(error.message)
+            return <div>Error</div>
           }
 
           startPolling(defaultPollingInterval)
