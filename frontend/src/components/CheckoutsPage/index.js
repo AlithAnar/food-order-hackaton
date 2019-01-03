@@ -1,15 +1,13 @@
 import React from 'react';
 import BaseComponent from '../BaseComponent';
 import { withRouter } from "react-router";
-import PropTypes from 'prop-types'
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import Checkout from '../Checkout';
 
 class CheckoutsPage extends BaseComponent {
 
   state = {
-    checkouts: [{ name: 'a' }, { name: 'b' }],
-    checkoutName: '',
+    checkouts: [{ date: Date.now() - 10000 }, { date: Date.now() - 20000 }],
   }
 
   render() {
@@ -18,31 +16,23 @@ class CheckoutsPage extends BaseComponent {
         <ListGroup>
           {this.state.checkouts.map(this.renderCheckout)}
         </ListGroup>
-        <input onChange={this.onChange} value={this.state.checkoutName} placeholder={'Type checkout name'}/>
-        <button onClick={this.onSave}>Save checkout name</button>
+        <button onClick={this.addCheckout}>Add checkout</button>
       </div>
     );
   }
 
   renderCheckout(checkout) {
     return (
-      <ListGroupItem>
+      <ListGroupItem key={checkout.date}>
         <Checkout checkout={checkout} />
       </ListGroupItem>
     )
   }
 
-  onChange(event) {
-    this.setState({
-      checkoutName: event.target.value,
-    })
-  }
-
-  onSave() {
-    const newCheckouts = this.state.checkouts.concat({name: this.state.checkoutName})
+  addCheckout() {
+    const newCheckouts = this.state.checkouts.concat({date: Date.now()})
     this.setState({
       checkouts: newCheckouts,
-      checkoutName: '',
     })
   }
 

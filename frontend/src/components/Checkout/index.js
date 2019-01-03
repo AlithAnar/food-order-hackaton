@@ -6,9 +6,10 @@ Checkout.propTypes = {
 }
 
 function Checkout(props) {
+  const date = new Date(props.checkout.date)
   return (
     <div>
-      <div>{props.checkout.name}</div>
+      <div>{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`}</div>
     </div>
   )
 }
