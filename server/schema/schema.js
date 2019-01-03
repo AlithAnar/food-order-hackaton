@@ -2,6 +2,7 @@ const graphql = require('graphql');
 const Restaurant = require('../model/Restaurant');
 const Selection = require('../model/Selection');
 const Checkout = require('../model/Checkout');
+const Vote = require('../model/Vote');
 
 
 const {
@@ -41,6 +42,16 @@ const CheckoutType = new GraphQLObjectType({
     }),
 });
 
+const VoteType = new GraphQLObjectType({
+    name: 'VoteType',
+    fields: () => ({
+        username: { type: GraphQLID},
+        date: {type: GraphQLString},
+        restaurantId: {type: GraphQLString},
+        checkoutId: {type: GraphQLString},
+    }),
+});
+
 const RootQuery = new GraphQLObjectType({
     name: 'FoodOrderRootQueryType',
     fields: {
@@ -71,6 +82,16 @@ const RootQuery = new GraphQLObjectType({
             },
             resolve: async function(parent, args) {
                 return await Selection.find({checkoutId: args.checkoutId});
+            }
+        },
+        votes: {
+            type: new GraphQLList(VoteType),
+            args: {
+                restaurantId: {type: new GraphQLNonNull(GraphQLString)},
+                checkoutId: {type: new GraphQLNonNull(GraphQLString)},
+            },
+            resolve: async function(parent, args) {
+                return await Vote.find({restaurantId: args.restaurantId, checkoutId: args.checkoutId});
             }
         }
 }});
@@ -135,6 +156,29 @@ const Mutation = new GraphQLObjectType({
                 return await newSelection.save();
             }
         },
+        addVote: {
+            type: VoteType,
+            args: {
+                checkoutId: {type: new GraphQLNonNull(GraphQLString)},
+                restaurantId: {type: new GraphQLNonNull(GraphQLString)},
+                username: {type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve: async function (parent, args) {
+                const newVote = new Vote({username: args.username, date: Date.now(), restaurantId: args.restaurantId, checkoutId: args.checkoutId});
+                return await newVote.save();
+            }
+        },
+        deleteVote: {
+            type: VoteType,
+            args: {
+                checkoutId: {type: new GraphQLNonNull(GraphQLString)},
+                restaurantId: {type: new GraphQLNonNull(GraphQLString)},
+                username: {type: new GraphQLNonNull(GraphQLString)}
+            },
+            resolve: async function (parent, args) {
+                return await Vote.findOneAndRemove({username: args.username, restaurantId: args.restaurantId, checkoutId: args.checkoutId});
+            }
+        }
     },
 });
 
