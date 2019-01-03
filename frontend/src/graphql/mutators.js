@@ -28,3 +28,23 @@ export const REMOVE_RESTAURANT_SELECTION = gql
     }
   }
 `
+
+export const ADD_VOTE = gql
+  `
+  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
+    addVote(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+      checkoutId
+      restaurantId
+    }
+  }
+`
+
+export const REMOVE_VOTE = gql
+  `
+  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
+    removeVote(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+      checkoutId
+      restaurantId
+    }
+  }
+`

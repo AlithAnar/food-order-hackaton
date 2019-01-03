@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import Restaurant from '../Restaurant';
 import { Button } from 'reactstrap'
 import { Mutation } from 'react-apollo'
-import { REMOVE_RESTAURANT_SELECTION } from '../../graphql/mutators';
+import { REMOVE_RESTAURANT_SELECTION, ADD_VOTE, REMOVE_VOTE } from '../../graphql/mutators';
+import RestaurantVotes from '../RestaurantVotes';
 
 RestaurantCandidate.propTypes = {
   restaurant: PropTypes.object.isRequired,
@@ -16,6 +17,10 @@ function RestaurantCandidate(props) {
       <Restaurant restaurant={props.restaurant} />
       {renderUpVote(props)}
       {renderDownVote(props)}
+      <RestaurantVotes
+        checkoutId={props.checkoutId}
+        restaurantId={props.restaurantId}
+      />
       {renderDeleteButton(props)}
     </div>
   )
@@ -23,13 +28,31 @@ function RestaurantCandidate(props) {
 
 function renderUpVote(props) {
   return (
-    <span>{'+'}</span>
+    <Mutation
+      mutation={ADD_VOTE}
+      variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id }}
+      onError={error => alert.error(error.message)}
+      onCompleted={() => {
+        alert.success('Vote added!')
+      }}
+    >
+      {onAddVote => <Button color="success" onClick={onAddVote}>{'+'}</Button>}
+    </Mutation>
   )
 }
 
 function renderDownVote(props) {
   return (
-    <span>{'-'}</span>
+    <Mutation
+      mutation={REMOVE_VOTE}
+      variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id }}
+      onError={error => alert.error(error.message)}
+      onCompleted={() => {
+        alert.success('Vote removed!')
+      }}
+    >
+      {onRemoveVote => <Button color="success" onClick={onRemoveVote}>{'-'}</Button>}
+    </Mutation>
   )
 }
 
@@ -41,7 +64,6 @@ function renderDeleteButton(props) {
       onError={error => alert.error(error.message)}
       onCompleted={() => {
         alert.success('Selection removed!')
-        this.setState({ name: '' })
       }}
     >
       {onRemoveSelection => <Button color="error" onClick={onRemoveSelection}>{'X'}</Button>}

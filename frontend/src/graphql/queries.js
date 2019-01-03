@@ -22,18 +22,6 @@ export const GET_CHECKOUTS = gql
   }
 `
 
-export const GET_CHECKOUT_VOTES = gql
-  `
-  {
-    votes {
-      restaurantId
-      checkoutId
-      userName
-      date
-    }
-  }
-`
-
 export const GET_CHECKOUT_MESSAGES = gql
   `
   {
@@ -49,12 +37,23 @@ export const GET_CHECKOUT_MESSAGES = gql
 
 export const GET_CHECKOUT_SELECTIONS = gql
   `
-  {
-    selections {
+  query Selections($checkoutId: String!) {
+    selections(checkoutId: $checkoutId) {
       restaurantIds
       checkoutId
     }
   }
 `
 
+export const GET_RESTAURANT_VOTES = gql
+  `
+  query Votes($checkoutId: String!, $restaurantId: String!) {
+    votes(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+      restaurantId
+      checkoutId
+      userName
+      date
+    }
+  }
+`
 
