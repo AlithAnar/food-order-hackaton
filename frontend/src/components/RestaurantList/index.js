@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import { Query } from 'react-apollo'
 import { GET_RESTAURANTS } from '../../graphql/queries';
+import * as alert from '../../utils/altert'
 
 
 RestaurantList.propTypes = {
@@ -24,7 +25,7 @@ function RestaurantList(props) {
           }
 
           if (error) {
-            // return toast.error(error.message, { position: 'top-center'})
+            return alert.error(error.message)
           }
 
           const restaurants = data.restaurants
