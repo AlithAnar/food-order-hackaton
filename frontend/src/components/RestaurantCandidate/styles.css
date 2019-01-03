@@ -1,0 +1,7 @@
+.restaurantCandidate {
+  display: flex;
+}
+
+.restaurantCandidateName{
+  margin-right: 50px;
+}

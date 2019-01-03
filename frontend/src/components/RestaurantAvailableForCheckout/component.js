@@ -89,7 +89,7 @@ function RestaurantAvailableForCheckout(props) {
         }}
       >
         {onAddSelection =>
-          <ListGroupItem key={restaurant._id} onClick={onAddSelection}>
+          <ListGroupItem key={restaurant._id} onClick={onAddSelection} className={'availableRestaurant'}>
             <Restaurant restaurant={restaurant} />
           </ListGroupItem>}
       </Mutation>

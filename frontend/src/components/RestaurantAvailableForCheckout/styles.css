@@ -1,3 +1,7 @@
 .availableRestaurants {
   width: 50%;
 }
+
+.availableRestaurant {
+  height: 64px;
+}

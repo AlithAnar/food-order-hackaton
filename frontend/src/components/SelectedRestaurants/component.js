@@ -18,7 +18,7 @@ RestaurantAvailableForCheckout.defaultProps = {
 }
 
 function RestaurantAvailableForCheckout(props) {
-  return (
+    return (
     <ListGroup className={'availableRestaurants'}>
       {decorateWithRestaurants((restaurantsLoading, restaurantsError, restaurantsData) => {
         return decorateWithSelections((selectionsLoading, selectionsError, selectionsData) => {
@@ -80,7 +80,9 @@ function RestaurantAvailableForCheckout(props) {
 
   function renderRestaurant(restaurant) {
     return (
-      <RestaurantCandidate restaurant={restaurant} checkoutId={props.checkoutId} />
+      <ListGroupItem key={restaurant._id}>
+        <RestaurantCandidate restaurant={restaurant} checkoutId={props.checkoutId} />
+      </ListGroupItem>
     )
   }
 }

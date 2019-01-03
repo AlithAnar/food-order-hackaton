@@ -12,7 +12,7 @@ Restaurant.defaultProps = {
 
 function Restaurant(props) {
   return (
-    <div onClick={props.onClick}>
+    <div onClick={props.onClick} className={props.className}>
       <div>{props.restaurant.name}</div>
     </div>
   )

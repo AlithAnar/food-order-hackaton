@@ -9,6 +9,7 @@ import * as alert from '../../utils/altert'
 import { GET_RESTAURANT_VOTES } from '../../graphql/queries';
 import { Query } from 'react-apollo';
 import { defaultPollingInterval } from '../../utils/constants';
+import './styles.css';
 
 RestaurantCandidate.propTypes = {
   restaurant: PropTypes.object.isRequired,
@@ -17,8 +18,8 @@ RestaurantCandidate.propTypes = {
 
 function RestaurantCandidate(props) {
   return (
-    <div key={props.restaurant._id}>
-      <Restaurant restaurant={props.restaurant} />
+    <div key={props.restaurant._id} className={'restaurantCandidate'}>
+      <Restaurant restaurant={props.restaurant} className={'restaurantCandidateName'} />
       <Query
         query={GET_RESTAURANT_VOTES}
         variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id }}
