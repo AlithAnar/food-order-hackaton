@@ -47,11 +47,11 @@ export const GET_CHECKOUT_SELECTIONS = gql
 
 export const GET_RESTAURANT_VOTES = gql
   `
-  query Votes($checkoutId: String!, $restaurantId: String!) {
+  query FoodOrderRootQueryType($checkoutId: String!, $restaurantId: String!) {
     votes(checkoutId: $checkoutId, restaurantId: $restaurantId) {
       restaurantId
       checkoutId
-      userName
+      username
       date
     }
   }

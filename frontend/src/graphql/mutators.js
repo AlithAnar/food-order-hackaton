@@ -31,20 +31,22 @@ export const REMOVE_RESTAURANT_SELECTION = gql
 
 export const ADD_VOTE = gql
   `
-  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
-    addVote(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!, $username: String!) {
+    addVote(checkoutId: $checkoutId, restaurantId: $restaurantId, username: $username) {
       checkoutId
       restaurantId
+      username
     }
   }
 `
 
-export const REMOVE_VOTE = gql
+export const DELETE_VOTE = gql
   `
-  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
-    removeVote(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!, $username: String!) {
+    deleteVote(checkoutId: $checkoutId, restaurantId: $restaurantId, username: $username) {
       checkoutId
       restaurantId
+      username
     }
   }
 `

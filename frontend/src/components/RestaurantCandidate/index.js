@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import Restaurant from '../Restaurant';
 import { Button } from 'reactstrap'
 import { Mutation } from 'react-apollo'
-import { REMOVE_RESTAURANT_SELECTION, ADD_VOTE, REMOVE_VOTE } from '../../graphql/mutators';
+import { REMOVE_RESTAURANT_SELECTION, ADD_VOTE, DELETE_VOTE } from '../../graphql/mutators';
 import RestaurantVotes from '../RestaurantVotes';
+import * as alert from '../../utils/altert'
 
 RestaurantCandidate.propTypes = {
   restaurant: PropTypes.object.isRequired,
@@ -13,24 +14,25 @@ RestaurantCandidate.propTypes = {
 
 function RestaurantCandidate(props) {
   return (
-    <div>
+    <div key={props.restaurant._id}>
       <Restaurant restaurant={props.restaurant} />
       {renderUpVote(props)}
       {renderDownVote(props)}
       <RestaurantVotes
         checkoutId={props.checkoutId}
-        restaurantId={props.restaurantId}
+        restaurantId={props.restaurant._id}
       />
-      {renderDeleteButton(props)}
+      {/* {renderDeleteButton(props)} */}
     </div>
   )
 }
 
 function renderUpVote(props) {
+  const username = localStorage.getItem('userName')
   return (
     <Mutation
       mutation={ADD_VOTE}
-      variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id }}
+      variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id, username }}
       onError={error => alert.error(error.message)}
       onCompleted={() => {
         alert.success('Vote added!')
@@ -42,10 +44,11 @@ function renderUpVote(props) {
 }
 
 function renderDownVote(props) {
+  const username = localStorage.getItem('userName')
   return (
     <Mutation
-      mutation={REMOVE_VOTE}
-      variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id }}
+      mutation={DELETE_VOTE}
+      variables={{ checkoutId: props.checkoutId, restaurantId: props.restaurant._id, username }}
       onError={error => alert.error(error.message)}
       onCompleted={() => {
         alert.success('Vote removed!')

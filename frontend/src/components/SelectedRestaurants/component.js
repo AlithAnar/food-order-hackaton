@@ -7,6 +7,7 @@ import { GET_CHECKOUT_SELECTIONS, GET_RESTAURANTS } from '../../graphql/queries'
 import * as alert from '../../utils/altert'
 import { defaultPollingInterval } from '../../utils/constants'
 import './styles.css'
+import RestaurantCandidate from '../RestaurantCandidate';
 
 RestaurantAvailableForCheckout.propTypes = {
   restaurants: PropTypes.array.isRequired,
@@ -79,9 +80,7 @@ function RestaurantAvailableForCheckout(props) {
 
   function renderRestaurant(restaurant) {
     return (
-      <ListGroupItem key={restaurant._id}>
-        <div>{restaurant.name}</div>
-      </ListGroupItem>
+      <RestaurantCandidate restaurant={restaurant} checkoutId={props.checkoutId} />
     )
   }
 }
