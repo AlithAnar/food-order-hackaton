@@ -21,7 +21,7 @@ function RestaurantList(props) {
 
 function renderRestaurant(restaurant) {
   return (
-    <ListGroupItem>
+    <ListGroupItem key={restaurant.id}>
       <Restaurant restaurant={restaurant} />
     </ListGroupItem>
   )

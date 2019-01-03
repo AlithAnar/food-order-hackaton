@@ -1,6 +1,7 @@
 import React from 'react';
 import BaseComponent from '../BaseComponent';
 import { withRouter } from "react-router";
+import { Input } from 'reactstrap';
 
 class LoginForm extends BaseComponent {
 
@@ -11,7 +12,7 @@ class LoginForm extends BaseComponent {
   render() {
     return (
       <div>
-        <input onChange={this.onChange} value={this.state.userName} placeholder={'Type your name'}/>
+        <Input onChange={this.onChange} value={this.state.userName} placeholder={'Type your name'}/>
         <button onClick={this.onSave}>Save user name</button>
       </div>
     );
