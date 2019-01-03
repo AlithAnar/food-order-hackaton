@@ -33,6 +33,25 @@ const RootQuery = new GraphQLObjectType({
     }
 });
 
+const Mutation = new GraphQLObjectType({
+    name: 'RestaurantMutation',
+    fields: {
+        addRestaurant: {
+            type: RestaurantType,
+            args: {
+                name: { type: new GraphQLNonNull(GraphQLString) },
+            },
+            resolve: async function (parent, args) {
+                const newRestaurant = new Restaurant({
+                    name: args.name,
+                });
+                return await newRestaurant.save();
+            }
+        },
+    },
+});
+
 module.exports = new GraphQLSchema({
     query: RootQuery,
+    mutation: Mutation
 });

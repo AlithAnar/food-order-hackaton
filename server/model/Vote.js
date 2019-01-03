@@ -7,7 +7,9 @@ ObjectId.prototype.valueOf = function () {
 };
 
 var restaurantSchema = new Schema({
-    name: String,
+    date: String,
+    username: String,
+
 });
 
 module.exports = mongoose.model('Restaurant', restaurantSchema, 'Restaurants');
