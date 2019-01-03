@@ -37,8 +37,8 @@ export const GET_CHECKOUT_MESSAGES = gql
 
 export const GET_CHECKOUT_SELECTIONS = gql
   `
-  query Selections($checkoutId: String!) {
-    selections(checkoutId: $checkoutId) {
+  query FoodOrderRootQueryType($checkoutId: String!) {
+    checkoutSelections(checkoutId: $checkoutId) {
       restaurantIds
       checkoutId
     }
