@@ -6,12 +6,10 @@ ObjectId.prototype.valueOf = function () {
     return this.toString()
 };
 
-var voteSchema = new Schema({
-    username: String,
+var checkoutSchema = new Schema({
+    restaurantId: {type: String, required: false},
     date: Date,
     status: String,
-    restaurantId: String,
-    checkoutId: String
 });
 
-module.exports = mongoose.model('Vote', voteSchema, 'Votes');
+module.exports = mongoose.model('Checkout', checkoutSchema, 'Checkouts');

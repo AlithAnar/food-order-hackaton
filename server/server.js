@@ -14,6 +14,12 @@ mongoose.connect(process.env.DB_URI, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
 
+ // var cars = ["5c2df83a35b9b514815e8b94", "5c2df83935b9b514815e8b93"];
+ // const Selection = require('./model/Selection');
+ // var newSelection = new Selection({restaurantIds: cars, checkoutId: "5c2e043ba8ee66171afd37fd"});
+ // db.collection('Selections').insert(newSelection);
+
+
 app.use('/graphql', graphqlHTTP({
     schema: schema,
     graphiql: true,
