@@ -4,14 +4,12 @@ const Selection = require('../model/Selection');
 const Checkout = require('../model/Checkout');
 const Vote = require('../model/Vote');
 
-
 const {
     GraphQLList,
     GraphQLObjectType,
     GraphQLString,
     GraphQLSchema,
     GraphQLID,
-    GraphQLInt,
     GraphQLNonNull,
 } = graphql;
 
