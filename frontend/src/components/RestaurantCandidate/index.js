@@ -48,7 +48,6 @@ function RestaurantCandidate(props) {
 }
 
 function renderUpVote(props, votes) {
-  console.log(votes)
   const username = localStorage.getItem('userName')
   if (votes.filter(vote => vote.username === username).length > 0) {
     return null
