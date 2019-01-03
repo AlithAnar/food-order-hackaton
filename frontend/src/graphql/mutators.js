@@ -48,3 +48,14 @@ export const REMOVE_VOTE = gql
     }
   }
 `
+
+
+export const ADD_CHECKOUT_SELECTION = gql
+  `
+  query FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
+    addSelection(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+      checkoutId
+      restaurantId
+    }
+  }
+`
