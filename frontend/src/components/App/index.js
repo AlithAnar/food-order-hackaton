@@ -5,11 +5,14 @@ import { Route, Link } from "react-router-dom";
 import LoginForm from '../LoginForm';
 import CheckoutsPage from '../CheckoutsPage';
 import { withRouter } from "react-router";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
+        <ToastContainer />
         <nav>
           <Link to="/">Home</Link>
           <Link to="/checkouts">Checkouts</Link>

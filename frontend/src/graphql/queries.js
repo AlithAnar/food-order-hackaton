@@ -5,7 +5,7 @@ export const GET_RESTAURANTS = gql
   {
     restaurants {
       name
-      rate
+      _id
     }
   }
 `

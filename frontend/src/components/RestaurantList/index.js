@@ -5,6 +5,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import { Query } from 'react-apollo'
 import { GET_RESTAURANTS } from '../../graphql/queries';
 
+
 RestaurantList.propTypes = {
   restaurants: PropTypes.array.isRequired,
 }
@@ -21,9 +22,9 @@ function RestaurantList(props) {
           if (loading) {
             return <div>Fetching</div>
           }
-          
+
           if (error) {
-            return <div>{`Error: ${error}`}</div>
+            // return toast.error(error.message, { position: 'top-center'})
           }
 
           const restaurants = data.restaurants
@@ -36,7 +37,7 @@ function RestaurantList(props) {
 
 function renderRestaurant(restaurant) {
   return (
-    <ListGroupItem key={restaurant.id}>
+    <ListGroupItem key={restaurant._id}>
       <Restaurant restaurant={restaurant} />
     </ListGroupItem>
   )
