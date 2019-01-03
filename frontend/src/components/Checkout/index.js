@@ -7,9 +7,9 @@ Checkout.propTypes = {
 }
 
 function Checkout(props) {
-  const date = new Date(props.checkout.date)
+  const date = new Date(parseInt(props.checkout.date))
   return (
-    <div onClick={() => props.history.push(`checkout/${props.checkout.id}`)}>
+    <div onClick={() => props.history.push(`checkout/${props.checkout._id}`)}>
       <div>{`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`}</div>
     </div>
   )
