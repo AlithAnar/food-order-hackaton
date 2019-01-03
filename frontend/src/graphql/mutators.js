@@ -18,3 +18,13 @@ export const CREATE_CHECKOUT = gql
     }
   }
 `
+
+export const REMOVE_RESTAURANT_SELECTION = gql
+  `
+  mutation FoodOrderMutation($checkoutId: String!, $restaurantId: String!) {
+    removeSelection(checkoutId: $checkoutId, restaurantId: $restaurantId) {
+      checkoutId
+      restaurantId
+    }
+  }
+`
