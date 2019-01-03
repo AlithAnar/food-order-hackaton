@@ -2,6 +2,8 @@ import React from 'react'
 import Restaurant from '../Restaurant';
 import PropTypes from 'prop-types'
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Query } from 'react-apollo'
+import { GET_RESTAURANTS } from '../../graphql/queries';
 
 RestaurantList.propTypes = {
   restaurants: PropTypes.array.isRequired,
@@ -14,7 +16,20 @@ RestaurantList.defaultProps = {
 function RestaurantList(props) {
   return (
     <ListGroup>
-      {props.restaurants.map(renderRestaurant)}
+      <Query query={GET_RESTAURANTS}>
+        {({ loading, error, data }) => {
+          if (loading) {
+            return <div>Fetching</div>
+          }
+          
+          if (error) {
+            return <div>{`Error: ${error}`}</div>
+          }
+
+          const restaurants = data.restaurants
+          return restaurants.map(renderRestaurant)
+        }}
+      </Query>
     </ListGroup>
   )
 }
