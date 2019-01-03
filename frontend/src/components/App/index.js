@@ -24,7 +24,9 @@ class App extends Component {
 
   componentDidMount() {
     const userName = localStorage.getItem('userName')
-    if (!userName) {
+    if (userName) {
+      this.props.history.push('/checkouts')
+    } else {
       this.props.history.push('/login')
     }
   }
