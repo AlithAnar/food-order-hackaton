@@ -5,6 +5,7 @@ import { ListGroup, ListGroupItem } from 'reactstrap';
 import { Query } from 'react-apollo'
 import { GET_CHECKOUTS } from '../../graphql/queries';
 import * as alert from '../../utils/altert'
+import { defaultPollingInterval } from '../../utils/constants'
 
 
 CheckoutList.propTypes = {
@@ -19,14 +20,16 @@ function CheckoutList(props) {
   return (
     <ListGroup>
       <Query query={GET_CHECKOUTS}>
-        {({ loading, error, data }) => {
+        {({ loading, error, data, startPolling, stopPolling }) => {
           if (loading) {
             return <div>Fetching</div>
           }
-
           if (error) {
+            stopPolling()
             return alert.error(error.message)
           }
+
+          startPolling(defaultPollingInterval)
 
           const checkouts = data.checkouts
           return checkouts.map(renderCheckout)
