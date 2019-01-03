@@ -12,7 +12,7 @@ class CheckoutsForm extends BaseComponent {
       <div>
         <Mutation 
           mutation={CREATE_CHECKOUT} 
-          variables={{ date: Date.now() }}
+          variables={{ date: `${Date.now()}`, status: 'ACTIVE' }}
           onError={error => alert.error(error.message)}
           onCompleted={() => {
             alert.success('Checkout created!')
