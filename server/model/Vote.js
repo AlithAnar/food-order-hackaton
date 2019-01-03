@@ -9,7 +9,6 @@ ObjectId.prototype.valueOf = function () {
 var voteSchema = new Schema({
     username: String,
     date: Date,
-    status: String,
     restaurantId: String,
     checkoutId: String
 });
