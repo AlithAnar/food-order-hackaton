@@ -3,6 +3,7 @@ import BaseComponent from '../BaseComponent';
 import { withRouter } from "react-router";
 import { ListGroup, ListGroupItem } from 'reactstrap';
 import Checkout from '../Checkout';
+import { Button } from 'reactstrap';
 
 class CheckoutsPage extends BaseComponent {
 
@@ -16,7 +17,7 @@ class CheckoutsPage extends BaseComponent {
         <ListGroup>
           {this.state.checkouts.map(this.renderCheckout)}
         </ListGroup>
-        <button onClick={this.addCheckout}>Add checkout</button>
+        <Button onClick={this.addCheckout}>Add checkout</Button>
       </div>
     );
   }
