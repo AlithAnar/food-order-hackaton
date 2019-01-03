@@ -7,9 +7,7 @@ ObjectId.prototype.valueOf = function () {
 };
 
 var selectionSchema = new Schema({
-    restaurantIds: [{
-        type: String
-    }],
+    restaurantId: String,
     checkoutId: String,
 });
 
