@@ -1,23 +1,29 @@
 import React from 'react'
 import Restaurant from '../Restaurant';
-import PropTypes from 'react-prop-types'
+import PropTypes from 'prop-types'
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
-Restaurant.PropTypes = {
+RestaurantList.propTypes = {
   restaurants: PropTypes.array.isRequired,
 }
 
+RestaurantList.defaultProps = {
+  restaurants: [],
+}
 
 function RestaurantList(props) {
   return (
-    <div>
+    <ListGroup>
       {props.restaurants.map(renderRestaurant)}
-    </div>
+    </ListGroup>
   )
 }
 
 function renderRestaurant(restaurant) {
   return (
-    <Restaurant restaurant={restaurant} />
+    <ListGroupItem>
+      <Restaurant restaurant={restaurant} />
+    </ListGroupItem>
   )
 }
 

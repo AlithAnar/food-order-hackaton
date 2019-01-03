@@ -1,7 +1,7 @@
 import React from 'react'
-import PropTypes from 'react-prop-types'
+import PropTypes from 'prop-types'
 
-Restaurant.PropTypes = {
+Restaurant.propTypes = {
   restaurant: PropTypes.object.isRequired,
 }
 
