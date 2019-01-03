@@ -42,7 +42,7 @@ const CheckoutType = new GraphQLObjectType({
 });
 
 const RootQuery = new GraphQLObjectType({
-    name: 'RestaurantRootQueryType',
+    name: 'FoodOrderRootQueryType',
     fields: {
         restaurants: {
             type: new GraphQLList(RestaurantType),
