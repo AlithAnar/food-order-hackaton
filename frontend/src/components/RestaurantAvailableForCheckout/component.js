@@ -29,7 +29,11 @@ function RestaurantAvailableForCheckout(props) {
             return <div>Error</div>
           }
 
-          const selectedRestaurants = selectionsData.checkoutSelections.filter(selection => selection.checkoutId === props.checkoutId)[0].restaurantIds
+          const selections = selectionsData.checkoutSelections.filter(selection => selection.checkoutId === props.checkoutId)
+          let selectedRestaurants = []
+          if (selections[0]) {
+            selectedRestaurants = selections[0].restaurantIds
+          }
           return restaurantsData.restaurants.filter(restaurant => selectedRestaurants.indexOf(restaurant._id) === -1).map(renderRestaurant)
         })
       })}
