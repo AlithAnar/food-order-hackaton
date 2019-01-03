@@ -14,6 +14,7 @@ export const GET_CHECKOUTS = gql
   `
   {
     checkouts {
+      _id
       restaurantId
       date
       status

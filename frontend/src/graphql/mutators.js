@@ -9,4 +9,12 @@ export const CREATE_RESTAURANT = gql
   }
 `
 
-
+export const CREATE_CHECKOUT = gql
+  `
+  mutation 
+  checkoutMutation($date: Number!) {
+    addCheckout(date: $date) {
+      date
+    }
+  }
+`
