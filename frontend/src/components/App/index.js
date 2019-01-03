@@ -1,23 +1,21 @@
 import React, { Component } from 'react';
 import './App.css';
 import MainPage from '../MainPage'
-import { Route, Link } from "react-router-dom";
+import { Route } from "react-router-dom";
 import LoginForm from '../LoginForm';
 import CheckoutsPage from '../CheckoutsPage';
 import CheckoutPage from '../CheckoutPage';
 import { withRouter } from "react-router";
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Navbar from '../Navbar'
 
 class App extends Component {
   render() {
     return (
       <div className="App">
         <ToastContainer />
-        <nav>
-          <Link to="/">Home</Link>
-          <Link to="/checkouts">Checkouts</Link>
-        </nav>
+        <Navbar />
         <Route path="/" exact component={MainPage} />
         <Route path="/checkouts" component={CheckoutsPage} />
         <Route path="/checkout/:id" component={CheckoutPage} />
